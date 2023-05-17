@@ -1,31 +1,29 @@
-import * as pushNotification from "./pushNotification.mjs";
+import { init, push } from "./notifications.mjs";
+
+let style = document.createElement("style");
+style.innerHTML = ``
+
 customElements.define("job-form", class extends HTMLElement {
     static get observedAttributes() { return ['name']; }
+    submitButton = document.createElement("button");
+
     constructor() {
         super();
     }
     connectedCallback() {
-        pushNotification.init();
-        let form = document.createElement("form");
-        form.addEventListener("submit", this.submit);
-        setTimeout(() => {
-            let children = this.querySelectorAll("*");
-            children.forEach(child => form.appendChild(child));
-            this.appendChild(form);
-        }, 1);
-    };
-    submit(/**@type Event*/event) {
-        const message = [
-            "1: Submit",
-        ]
-        pushNotification.push("submit", "submit1", message.join('\\n'))
-        setTimeout(() => {
-            pushNotification.push("submit2", "submit2", message.join('\\n'))
-        }, 500);
+        document.querySelector("head").appendChild(style);
 
+        this.submitButton.textContent = "Submit";
         setTimeout(() => {
-            pushNotification.push("submit3", "submit3", message.join('\\n'))
-        }, 1000);
+            this.appendChild(this.submitButton);
+
+        })
+    };
+    inputTo(/**@type HTMLInputElement */ element) {
+
+    }
+    submit(/**@type Event*/event) {
         event.preventDefault();
+        console.log("submit");
     }
 })
