@@ -1,14 +1,14 @@
+#!/usr/node
 const esbuild = require("esbuild");
 const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
 const { JSDOM } = require("jsdom");
 
-(async () => {
+module.exports = async (fileName, outputFileName) => {
     globalThis.React = require('react');
     globalThis.ReactDOM = require("react-dom");
-    const file = "./index.tsx";
 
     const result = await esbuild.build({
-        entryPoints: [file],
+        entryPoints: [fileName],
         external: ['react', 'react-dom'],
         format: "iife",
         globalName: "mainComponent",
@@ -49,5 +49,5 @@ const { JSDOM } = require("jsdom");
     initScript.text = `ReactDOM.hydrate(mainComponent, document);`;
     page.window.document.querySelector("body").appendChild(initScript);
 
-    require("fs").writeFileSync("index.html", page.serialize());
-})()
+    require("fs").writeFileSync(outputFileName, page.serialize());
+}
