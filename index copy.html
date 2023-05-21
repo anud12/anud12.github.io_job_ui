@@ -1,4 +1,4 @@
-<html><head></head><body><script src="./inline.js"></script><div class="Hello world pe bune"></div><a href="./index copy.html">To copy</a><div>Child <!-- -->Hello world<!-- --> demo<button>Click me </button></div><script src="https://unpkg.com/react@18/umd/react.production.min.js"></script><script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script><script>var mainComponent = (() => {
+<html><head></head><body><script src="./inline.js"></script><div class="Hello world"></div><div>Child <!-- -->Hello world<!-- --> demo<button>Click me </button></div><script src="https://unpkg.com/react@18/umd/react.production.min.js"></script><script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script><script>var demo = (() => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -31,7 +31,7 @@
   // external-global-plugin:react
   var require_react = __commonJS({
     "external-global-plugin:react"(exports, module) {
-      module.exports = globalThis.React;
+      module.exports = window.React;
     }
   });
 
@@ -55,9 +55,9 @@
     "index.tsx"(exports, module) {
       var import_react = __toESM(require_react());
       init_MyComponent();
-      module.exports = /* @__PURE__ */ import_react.default.createElement("html", null, /* @__PURE__ */ import_react.default.createElement("head", null), /* @__PURE__ */ import_react.default.createElement("body", null, /* @__PURE__ */ import_react.default.createElement("script", { src: "./inline.js" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "Hello world pe bune" }), /* @__PURE__ */ import_react.default.createElement("a", { href: "./index copy.html" }, "To copy"), /* @__PURE__ */ import_react.default.createElement(MyComponent_default, { name: "Hello world" })));
+      module.exports = /* @__PURE__ */ import_react.default.createElement("html", null, /* @__PURE__ */ import_react.default.createElement("head", null), /* @__PURE__ */ import_react.default.createElement("body", null, /* @__PURE__ */ import_react.default.createElement("script", { src: "./inline.js" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "Hello world" }), /* @__PURE__ */ import_react.default.createElement(MyComponent_default, { name: "Hello world" })));
     }
   });
   return require_anud12_github();
 })();
-</script><script>ReactDOM.hydrate(mainComponent, document);</script></body></html>
+</script><script>ReactDOM.hydrate(demo, document);</script></body></html>
