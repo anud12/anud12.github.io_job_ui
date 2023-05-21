@@ -1,1 +1,1 @@
-require("./build")("index.tsx", "index.html");
+require("./index")("index.tsx", "index.html");
