@@ -3,7 +3,7 @@ const esbuild = require("esbuild");
 const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
 const { JSDOM } = require("jsdom");
 
-module.exports = async (fileName, outputFileName) => {
+const JSX = async (fileName, outputFileName, config) => {
     globalThis.React = require('react');
     globalThis.ReactDOM = require("react-dom");
 
@@ -19,7 +19,8 @@ module.exports = async (fileName, outputFileName) => {
                 'react': 'globalThis.React',
                 'react-dom': 'globalThis.ReactDOM',
             })
-        ]
+        ],
+        ...config
     });
     const codeString = result.outputFiles[0].text;
 
@@ -48,6 +49,8 @@ module.exports = async (fileName, outputFileName) => {
     initScript = page.window.document.createElement("script");
     initScript.text = `ReactDOM.hydrate(mainComponent, document);`;
     page.window.document.querySelector("body").appendChild(initScript);
-
-    require("fs").writeFileSync(outputFileName, page.serialize());
+    require("fs").writeFileSync(outputFileName, "<!DOCTYPE html>\n" + page.serialize());
+}
+module.exports = {
+    JSX
 }
