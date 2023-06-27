@@ -14,6 +14,7 @@ const JSX = async (fileName, outputFileName, config) => {
         globalName: "mainComponent",
         bundle: true,
         write: false,
+        sourcemap: "inline",
         plugins: [
             externalGlobalPlugin({
                 'react': 'globalThis.React',
