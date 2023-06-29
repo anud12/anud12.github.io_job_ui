@@ -43,14 +43,15 @@ const JSX = async (fileName, outputFileName, config) => {
     page.window.document.querySelector("body").appendChild(initScript);
 
     let script = page.window.document.createElement("script");
-    script.text = result.outputFiles[0].text;
+    initScript.setAttribute("src", `./${fileName}.js`);
+    require("fs").writeFileSync(`${outputFileName}.js`, result.outputFiles[0].text)
     page.window.document.querySelector("body").appendChild(script);
 
 
     initScript = page.window.document.createElement("script");
     initScript.text = `ReactDOM.hydrate(mainComponent, document);`;
     page.window.document.querySelector("body").appendChild(initScript);
-    require("fs").writeFileSync(outputFileName, "<!DOCTYPE html>\n" + page.serialize());
+    require("fs").writeFileSync(`${outputFileName}.html`, "<!DOCTYPE html>\n" + page.serialize());
 }
 module.exports = {
     JSX
