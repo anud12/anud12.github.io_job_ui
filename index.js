@@ -40,7 +40,6 @@ const JSX = async (fileName, outputFileName, config) => {
 
     const reactDomScript = page.window.document.createElement("script");
     reactDomScript.setAttribute("src", "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js");
-    reactDomScript.setAttribute("src", `./${path.basename(outputFileName)}.js`);
     page.window.document.querySelector("body").appendChild(reactDomScript);
 
     const script = page.window.document.createElement("script");
