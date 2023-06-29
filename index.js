@@ -41,10 +41,11 @@ const JSX = async (fileName, outputFileName, config) => {
 
     initScript = page.window.document.createElement("script");
     initScript.setAttribute("src", "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js");
+    initScript.setAttribute("src", `./${path.basename(outputFileName)}.js`);
     page.window.document.querySelector("body").appendChild(initScript);
 
     let script = page.window.document.createElement("script");
-    initScript.setAttribute("src", `./${path.basename(outputFileName)}.js`);
+    script.setAttribute("src", `./${path.basename(outputFileName)}.js`);
     require("fs").writeFileSync(`${outputFileName}.js`, result.outputFiles[0].text)
     page.window.document.querySelector("body").appendChild(script);
 
