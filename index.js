@@ -53,7 +53,7 @@ const JSX = async (fileName, outputFileName, config) => {
     initScript.text = `ReactDOM.hydrate(mainComponent, document);`;
     page.window.document.querySelector("body").appendChild(initScript);
 
-    const html = prettier.format(page.serialize());
+    const html = prettier.format(page.serialize(), { parser: "html" });
     require("fs").writeFileSync(`${outputFileName}.html`, "<!DOCTYPE html>\n" + html);
 }
 module.exports = {
