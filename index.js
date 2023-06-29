@@ -34,15 +34,14 @@ const JSX = async (fileName, outputFileName, config) => {
         resources: "usable"
     });
 
-    let initScript;
-    initScript = page.window.document.createElement("script");
-    initScript.setAttribute("src", "https://unpkg.com/react@18/umd/react.production.min.js");
-    page.window.document.querySelector("body").appendChild(initScript);
+    const reactScript = page.window.document.createElement("script");
+    reactScript.setAttribute("src", "https://unpkg.com/react@18/umd/react.production.min.js");
+    page.window.document.querySelector("body").appendChild(reactScript);
 
-    initScript = page.window.document.createElement("script");
-    initScript.setAttribute("src", "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js");
-    initScript.setAttribute("src", `./${path.basename(outputFileName)}.js`);
-    page.window.document.querySelector("body").appendChild(initScript);
+    const reactDomScript = page.window.document.createElement("script");
+    reactDomScript.setAttribute("src", "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js");
+    reactDomScript.setAttribute("src", `./${path.basename(outputFileName)}.js`);
+    page.window.document.querySelector("body").appendChild(reactDomScript);
 
     let script = page.window.document.createElement("script");
     script.setAttribute("src", `./${path.basename(outputFileName)}.js`);
@@ -50,7 +49,7 @@ const JSX = async (fileName, outputFileName, config) => {
     page.window.document.querySelector("body").appendChild(script);
 
 
-    initScript = page.window.document.createElement("script");
+    const initScript = page.window.document.createElement("script");
     initScript.text = `ReactDOM.hydrate(mainComponent, document);`;
     page.window.document.querySelector("body").appendChild(initScript);
     require("fs").writeFileSync(`${outputFileName}.html`, "<!DOCTYPE html>\n" + page.serialize());
