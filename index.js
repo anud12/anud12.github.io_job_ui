@@ -1,9 +1,10 @@
 #!/usr/node
-const esbuild = require("esbuild");
-const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
-const { JSDOM } = require("jsdom");
-
 const JSX = async (fileName, outputFileName, config) => {
+    const esbuild = require("esbuild");
+    const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
+    const { JSDOM } = require("jsdom");
+    const path = require("path");
+
     globalThis.React = require('react');
     globalThis.ReactDOM = require("react-dom");
 
@@ -43,7 +44,7 @@ const JSX = async (fileName, outputFileName, config) => {
     page.window.document.querySelector("body").appendChild(initScript);
 
     let script = page.window.document.createElement("script");
-    initScript.setAttribute("src", `./${outputFileName}.js`);
+    initScript.setAttribute("src", `./${path.basename(outputFileName)}.js`);
     require("fs").writeFileSync(`${outputFileName}.js`, result.outputFiles[0].text)
     page.window.document.querySelector("body").appendChild(script);
 
