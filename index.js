@@ -43,7 +43,7 @@ const JSX = async (fileName, outputFileName, config) => {
     reactDomScript.setAttribute("src", `./${path.basename(outputFileName)}.js`);
     page.window.document.querySelector("body").appendChild(reactDomScript);
 
-    let script = page.window.document.createElement("script");
+    const script = page.window.document.createElement("script");
     script.setAttribute("src", `./${path.basename(outputFileName)}.js`);
     require("fs").writeFileSync(`${outputFileName}.js`, result.outputFiles[0].text)
     page.window.document.querySelector("body").appendChild(script);
