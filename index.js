@@ -1,6 +1,7 @@
 #!/usr/node
 const JSX = async (fileName, outputFileName, config) => {
     const esbuild = require("esbuild");
+    const prettier = require("prettier");
     const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
     const { JSDOM } = require("jsdom");
     const path = require("path");
@@ -51,7 +52,8 @@ const JSX = async (fileName, outputFileName, config) => {
     const initScript = page.window.document.createElement("script");
     initScript.text = `ReactDOM.hydrate(mainComponent, document);`;
     page.window.document.querySelector("body").appendChild(initScript);
-    require("fs").writeFileSync(`${outputFileName}.html`, "<!DOCTYPE html>\n" + page.serialize());
+    const html = prettier.format("<!DOCTYPE html>\n" + page.serialize());
+    require("fs").writeFileSync(`${outputFileName}.html`, html);
 }
 module.exports = {
     JSX
