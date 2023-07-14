@@ -17,10 +17,12 @@
     "url": "https://github.com/anud12/anud12.github.io_job_ui/issues"
   },
   "homepage": "https://github.com/anud12/anud12.github.io_job_ui#readme",
+  "dependencies": {
+    "esbuild": "0.17.19"
+  },
   "devDependencies": {
     "@types/prettier": "^2.7.3",
     "babel": "^6.23.0",
-    "esbuild": "0.17.19",
     "esbuild-plugin-external-global": "^1.0.1",
     "jsdom": "^22.0.0",
     "prettier": "^2.8.8",

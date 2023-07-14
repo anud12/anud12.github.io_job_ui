@@ -156,5 +156,6 @@ require("esbuild").build({
     bundle:true,
     platform: "node",
     outdir: "lib",
+    external: ["esbuild"],
     plugins: [jsdomPatch]
 }).catch(() => process.exit(1));
