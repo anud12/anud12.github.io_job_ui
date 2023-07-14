@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "esbuild ./index.js --bundle --platform=node --outdir=lib ",
+    "build": "node index.js",
     "start": "node ./src/app.js"
   },
   "repository": {
