@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/anud12/anud12.github.io_ui_compiler#readme",
   "dependencies": {
-    "esbuild": "0.17.19"
+    "esbuild": "0.17.19",
+    "prettier": "^2.8.8"
   },
   "devDependencies": {
     "@types/prettier": "^2.7.3",
