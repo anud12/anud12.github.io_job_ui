@@ -1,22 +1,22 @@
 {
-  "name": "anud12.github.io_ui",
+  "name": "anud12.github.io_ui_compiler",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "node esbuild.js",
     "start": "node ./src/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anud12/anud12.github.io_job_ui.git"
+    "url": "git+https://github.com/anud12/anud12.github.io_ui_compiler.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/anud12/anud12.github.io_job_ui/issues"
+    "url": "https://github.com/anud12/anud12.github.io_ui_compiler/issues"
   },
-  "homepage": "https://github.com/anud12/anud12.github.io_job_ui#readme",
+  "homepage": "https://github.com/anud12/anud12.github.io_ui_compiler#readme",
   "dependencies": {
     "esbuild": "0.17.19",
     "babel": "^6.23.0",
