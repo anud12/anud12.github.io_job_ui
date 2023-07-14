@@ -2,9 +2,9 @@
   "name": "anud12.github.io_ui",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild ./index.js --bundle --platform=node --outdir=lib ",
     "start": "node ./src/app.js"
   },
   "repository": {
@@ -17,7 +17,7 @@
     "url": "https://github.com/anud12/anud12.github.io_job_ui/issues"
   },
   "homepage": "https://github.com/anud12/anud12.github.io_job_ui#readme",
-  "dependencies": {
+  "devDependencies": {
     "@types/prettier": "^2.7.3",
     "babel": "^6.23.0",
     "esbuild": "0.17.19",
