@@ -2,7 +2,7 @@
   "name": "anud12.github.io_ui_compiler",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "node esbuild.js",
     "start": "node ./src/app.js"
@@ -18,8 +18,7 @@
   },
   "homepage": "https://github.com/anud12/anud12.github.io_ui_compiler#readme",
   "dependencies": {
-    "esbuild": "0.17.19",
-    "prettier": "^2.8.8"
+    "esbuild": "0.17.19"
   },
   "devDependencies": {
     "@types/prettier": "^2.7.3",
