@@ -154,6 +154,7 @@ const jsdomPatch = {
 require("esbuild").build({
     entryPoints: ["index.js"],
     bundle:true,
+    external: ['esbuild'],
     platform: "node",
     outdir: "lib",
     plugins: [jsdomPatch]
