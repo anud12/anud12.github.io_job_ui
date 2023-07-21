@@ -30,7 +30,7 @@ const JSX = async (fileName, outputFileName, config) => {
 
     const ReactDOMServer = require("react-dom/server");
     eval(codeString);
-    const htmlPage = ReactDOMServer.renderToString(mainComponent);
+    const htmlPage = ReactDOMServer.renderToString(mainComponent.default);
 
     let page = new JSDOM(htmlPage, {
         resources: "usable"
