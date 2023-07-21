@@ -17,6 +17,7 @@ const JSX = async (fileName, outputFileName, config) => {
         bundle: true,
         write: false,
         sourcemap: "inline",
+        treeShaking: true,
         plugins: [
             externalGlobalPlugin({
                 'react': 'globalThis.React',
