@@ -54,7 +54,7 @@ const JSX = async (fileName, outputFileName, config) => {
 
 
     const initScript = page.window.document.createElement("script");
-    initScript.text = `ReactDOM.hydrate(mainComponent, document);`;
+    initScript.text = `ReactDOM.hydrate(mainComponent.default, document);`;
     page.window.document.querySelector("body").appendChild(initScript);
 
     const html = prettier.format(page.serialize(), { parser: "html" });
