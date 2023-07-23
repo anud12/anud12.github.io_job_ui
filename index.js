@@ -1,5 +1,8 @@
 #!/usr/node
 const JSX = async (fileName, outputFileName, config) => {
+    config = config ?? {
+
+    };
     const esbuild = require("esbuild");
     const prettier = require("prettier");
     const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
@@ -11,7 +14,7 @@ const JSX = async (fileName, outputFileName, config) => {
 
     const result = await esbuild.build({
         entryPoints: [fileName],
-        external: ['react', 'react-dom'],
+        external: ['react', 'react-dom', ...Object.keys(config.external ?? {})],
         format: "iife",
         globalName: "mainComponent",
         bundle: true,
@@ -22,9 +25,9 @@ const JSX = async (fileName, outputFileName, config) => {
             externalGlobalPlugin({
                 'react': 'globalThis.React',
                 'react-dom': 'globalThis.ReactDOM',
+                ...config.external,
             })
         ],
-        ...config
     });
     const codeString = result.outputFiles[0].text;
 
