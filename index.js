@@ -68,7 +68,7 @@ const JSX = async (fileName, outputFileName, config) => {
 
     const mapFile = result.outputFiles.find(e => e.path === "/_.js.map");
     const map = JSON.parse(mapFile.text);
-    map.sources = [`${path.basename(outputFileName)}${path.extname(fileName)}`];
+    map.sources = map.sources.map(e => `/${e}`.replace(__dirname, ""))
     fs.writeFileSync(`${outputFileName}${mapFile.path.replace("/_", "")}`, JSON.stringify(map, null, 2));
 }
 module.exports = {
