@@ -1,1 +1,1 @@
-require("./index")("index.tsx", "index.html");
+require("./index").JSX("out.tsx", "out/index");

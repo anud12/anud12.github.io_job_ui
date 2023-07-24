@@ -8,18 +8,21 @@ const JSX = async (fileName, outputFileName, config) => {
     const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
     const { JSDOM } = require("jsdom");
     const path = require("path");
+    const fs = require("fs")
 
     globalThis.React = require('react');
     globalThis.ReactDOM = require("react-dom");
 
     const result = await esbuild.build({
         entryPoints: [fileName],
+        entryNames:"_",
         external: ['react', 'react-dom', ...Object.keys(config.external ?? {})],
         format: "iife",
         globalName: "mainComponent",
         bundle: true,
         write: false,
-        sourcemap: "inline",
+        outdir:"/",
+        sourcemap: "linked",
         treeShaking: true,
         plugins: [
             externalGlobalPlugin({
@@ -29,7 +32,8 @@ const JSX = async (fileName, outputFileName, config) => {
             })
         ],
     });
-    const codeString = result.outputFiles[0].text;
+    const jsFile = result.outputFiles.find(e => e.path === "/_.js");
+    const codeString = jsFile.text
 
     const ReactDOMServer = require("react-dom/server");
     eval(codeString);
@@ -49,7 +53,7 @@ const JSX = async (fileName, outputFileName, config) => {
 
     const script = page.window.document.createElement("script");
     script.setAttribute("src", `./${path.basename(outputFileName)}.js`);
-    require("fs").writeFileSync(`${outputFileName}.js`, result.outputFiles[0].text)
+    fs.writeFileSync(`${outputFileName}${jsFile.path.replace("/_", "")}`, jsFile.text.replace("//# sourceMappingURL=_", `//# sourceMappingURL=${path.basename(outputFileName)}`));
     page.window.document.querySelector("body").appendChild(script);
 
 
@@ -58,7 +62,14 @@ const JSX = async (fileName, outputFileName, config) => {
     page.window.document.querySelector("body").appendChild(initScript);
 
     const html = prettier.format(page.serialize(), { parser: "html" });
-    require("fs").writeFileSync(`${outputFileName}.html`, "<!DOCTYPE html>\n" + html);
+
+    fs.writeFileSync(`${outputFileName}.html`, "<!DOCTYPE html>\n" + html);
+
+
+    const mapFile = result.outputFiles.find(e => e.path === "/_.js.map");
+    const map = JSON.parse(mapFile.text);
+    map.sources = [`${path.basename(outputFileName)}${path.extname(fileName)}`];
+    fs.writeFileSync(`${outputFileName}${mapFile.path.replace("/_", "")}`, JSON.stringify(map, null, 2));
 }
 module.exports = {
     JSX
